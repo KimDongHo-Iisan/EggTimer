@@ -12,4 +12,8 @@ class ViewController: UIViewController {
     
 
 
+    @IBAction func hardnessSelected(_ sender: UIButton) {
+        print(sender.currentTitle) //현재 누른 버튼의 이름 출력
+    }
+    
 }
