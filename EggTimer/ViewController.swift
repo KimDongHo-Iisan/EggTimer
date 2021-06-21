@@ -10,7 +10,9 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    // 분을 초로 정의
+    //타이틀 레이블 생성.
+    @IBOutlet weak var titleLabel: UIView!
+    
     let eggTimes = ["Soft": 300, "Medium" : 420, "Hard" : 7]
     
     var secondsRemaining = 60
@@ -31,12 +33,11 @@ class ViewController: UIViewController {
         if secondsRemaining > 0 {
             print("\(secondsRemaining) seconds.")
             secondsRemaining -= 1
+        } else { // 만약 시간이 다 되어 0이 되면
+            timer.invalidate() //타이머를 중단하고
+            titleLabel.text = "Done" // 레이블의 텍스트를 Done으로 변경해라.
         }
     }
     
 }
 
-
-
-
-// 하지만 이것으로는 처음 버튼을 눌럿을때는 정상으로 타이머가 작동하지만, 아직 타이머가 끝나지않은 상태에서 다른 버튼을 누르게 되면, 타이머의 시간이 2배는 빠르게 실행된다. -> 이유는 다른 타이머를 눌렀을때, 이전에 눌렀던 타이머가 중단되는 것이 아닌, 새로운 타이머가 실행되는 것이다. 그렇기 때문에 시간이 두배로 늘어나게 된다.
