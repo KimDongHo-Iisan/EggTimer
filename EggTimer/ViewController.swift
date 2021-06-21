@@ -24,16 +24,20 @@ class ViewController: UIViewController {
         timer.invalidate()
         let hardness = sender.currentTitle!
         
-        totalTime = eggTimes[hardness]! //전체 시간 대입
+        totalTime = eggTimes[hardness]!
+        
+        progressBar.progress = 0.0 // 버튼을 눌렀을때 초기화 되도록 함.
+        secondsPassed = 0
+        titleLabel.text = hardness // 버튼을 눌렀을때, 원래 타이틀로 변경되게 함.
         
         timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
     }
     
     @objc func updateTimer(){
-        if secondsPassed < totalTime { // 지나간 시간이 전체 걸리는 시간 보다 작을때,
-            let percentageProgress = secondsPassed / totalTime // 진행률은 전체 걸리는 시간 / 지나간 시간.
-            progressBar.progress = Float(percentageProgress) // 진행률을 진행바에 대입. 진행률은 부동소수점임.  -> 하지만 이렇게 코드를 짜면 값이 나오지 않고 0만 나온다.
-            secondsPassed += 1 //걸리는 시간을 1씩 증가
+        if secondsPassed < totalTime {
+            secondsPassed += 1 // 위로 올리는 이유 - > 이 코드가 아래에 있으면 진행률이 1까지 올라가지 못함.
+            progressBar.progress = Float(secondsPassed) / Float(totalTime) 
+            
         } else {
             timer.invalidate()
             titleLabel.text = "Done"
