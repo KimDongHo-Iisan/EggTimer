@@ -10,7 +10,7 @@ import UIKit
 
 class ViewController: UIViewController {
     
-   
+    
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var progressBar: UIProgressView!
     
@@ -36,7 +36,15 @@ class ViewController: UIViewController {
     @objc func updateTimer(){
         if secondsPassed < totalTime {
             secondsPassed += 1 // 위로 올리는 이유 - > 이 코드가 아래에 있으면 진행률이 1까지 올라가지 못함.
-            progressBar.progress = Float(secondsPassed) / Float(totalTime) 
+            progressBar.progress = Float(secondsPassed) / Float(totalTime)
+            /*
+             let a = 5
+             let b = 2
+             Float(a / b) 이 경우에는 a/b를 먼저 실행해서 2가 출력된다 -> 정수는 뒤의 소수점을 없애버리기 때문 해서 2를 부동소수점화해서 2.0이 나온다. 2.5가 출력되게 하려면 계산하기전에 먼저 부동소수점으로 변환해줘야한다.
+             Float(a) / Float(b) 이렇게 해줘야 2.5가 출력됨
+             선언할때 let a : Float = 5
+             let b : Float = 2
+             */
             
         } else {
             timer.invalidate()
