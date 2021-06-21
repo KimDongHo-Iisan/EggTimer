@@ -15,20 +15,22 @@ class ViewController: UIViewController {
     
     var secondsRemaining = 60
     
+    var timer = Timer() // 타이머 변수 생성
+    
     @IBAction func hardnessSelected(_ sender: UIButton) {
         
-        let hardness = sender.currentTitle! //sender.currentTitle에 언래핑을 하면 해결될것이라 생각했지만,
+        timer.invalidate() //타이머를 중지해줌
+        let hardness = sender.currentTitle!
         
         secondsRemaining = eggTimes[hardness]!
         
-        Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true) // timeInterval : 타이머를 얼마나 자주 실행할것인지 물어보는 것,매초 업데이트를 원하기 때문에 1.0 타이머를 반복할지 여부를 결정 repeats . #selector는 오브젝트 c시절에 사용하던것, 이를 사용할때는 @objc를 넣어야함.
-        
+        timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
     }
     //매초마다 발생하는 함수
     @objc func updateTimer(){
-        if secondsRemaining > 0 {  // 아직 시간이 있는지 확인
-            print("\(secondsRemaining) seconds.") // 남은 시간을 출력
-            secondsRemaining -= 1 //실행될때마다 -1이 됨
+        if secondsRemaining > 0 {
+            print("\(secondsRemaining) seconds.")
+            secondsRemaining -= 1
         }
     }
     
@@ -36,3 +38,5 @@ class ViewController: UIViewController {
 
 
 
+
+// 하지만 이것으로는 처음 버튼을 눌럿을때는 정상으로 타이머가 작동하지만, 아직 타이머가 끝나지않은 상태에서 다른 버튼을 누르게 되면, 타이머의 시간이 2배는 빠르게 실행된다. -> 이유는 다른 타이머를 눌렀을때, 이전에 눌렀던 타이머가 중단되는 것이 아닌, 새로운 타이머가 실행되는 것이다. 그렇기 때문에 시간이 두배로 늘어나게 된다.
