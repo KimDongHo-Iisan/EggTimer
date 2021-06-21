@@ -16,3 +16,12 @@ func loveCalculator(){
 }
 
 loveCalculator() // 함수 실행
+
+/*
+ == 같음
+ != 같지 않음
+ > 더 큼
+ < 더 작음
+ >= 크거나 같음
+ <= 작거나 같음
+ */
