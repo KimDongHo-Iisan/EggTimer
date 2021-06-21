@@ -12,6 +12,7 @@ class ViewController: UIViewController {
     
     //타이틀 레이블 생성.
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var progressBar: UIProgressView!
     
     
     let eggTimes = ["Soft": 300, "Medium" : 420, "Hard" : 7]
@@ -22,6 +23,7 @@ class ViewController: UIViewController {
     
     @IBAction func hardnessSelected(_ sender: UIButton) {
         
+        progressBar.progress = 1.0
         timer.invalidate() //타이머를 중지해줌
         let hardness = sender.currentTitle!
         
