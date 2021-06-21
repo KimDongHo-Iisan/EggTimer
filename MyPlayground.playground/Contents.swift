@@ -1,20 +1,22 @@
 
-
-/* loveCalculator 함수를 생성하고, 난수를 loveScore 상수 선언
- 만약 loveScore가 80보다 큰 값이라면,"You love each other like Knaye lovers Kanye."를 출력,
- 40보다 크고 80보다 작은 값이라면, "You go together like Coke and Mentos"
- 40보다 작다면, "You'll be forever alone"
- 
+//switch 문으로 바꾸기.
+/*
+ a...b //Close Range
+ a..<b //half Open Range
+ ...b //One sided Range
  */
 func loveCalculator(){
-    let loveScore = Int.random(in: 0...100) //0부터 100 범위에서 난수를 생성하는 것을 loveScore로 선언
+    let loveScore = Int.random(in: 0...100)
     
-    if loveScore > 80 { // 만약 loveScore가 80보다 큰 값이라면,
+    switch loveScore {
+    case 81...100: // 81부터 100까지
         print("You love each other like Knaye lovers Kanye.")
-    } else if loveScore > 40 { // 만약 40보다 크다면, -> 80보다 작고 40보다 큰 값
+    case 40..<81: //40에서 81미만
         print("You go together like Coke and Mentos")
-    } else { //그 이외의 조건 -> 40보다 작다.
-        print("You'll be forever alone")
+    case ...40: // 40미만
+        print("You go together like Coke and Mentos")
+    default: // 그 이외의 범위
+        print("error")
     }
     
 }
